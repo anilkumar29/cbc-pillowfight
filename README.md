@@ -1,5 +1,5 @@
 # cbc-pillowfight
-cbc-pillowfight - Stress Test for Couchbase Client and Cluster
+cbc-pillowfight - Workload generator for Couchbase clusters running in Openshift
 
 ## Build the Docker image locally
 ```bash
