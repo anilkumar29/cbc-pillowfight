@@ -10,17 +10,17 @@ objects:
   - apiVersion: v1
     kind: ReplicationController
     metadata:
-      name: cbc-pillowfight
+      name: cbc-pillowfight-${REPLICATION_CONTROLLER_SUFFIX}
     spec:
       replicas: ${REPLICA_COUNT}
       template:
         metadata:
-          name: cbc-pillowfight
+          name: cbc-pillowfight-${REPLICATION_CONTROLLER_SUFFIX}
           labels:
-            app: cbc-pillowfight
+            app: cbc-pillowfight-${REPLICATION_CONTROLLER_SUFFIX}
         spec:
           containers:
-            - name: cbc-pillowfight
+            - name: cbc-pillowfight-${REPLICATION_CONTROLLER_SUFFIX}
               image: ${REGISTRY}/nmotte/cbc-pillowfight:0.0.1
               imagePullPolicy: Always
               env:
@@ -45,6 +45,10 @@ objects:
                 - name: USECS
                   value: "${USECS}"
 parameters:
+  - name: REPLICATION_CONTROLLER_SUFFIX
+    description: Replication Controller suffix
+    value: "default"
+    required: true
   - name: REPLICA_COUNT
     description: Number of replicas to run
     value: "1"
@@ -71,6 +75,9 @@ parameters:
     description: The percentage of operations which should be mutations. A value of 100 means only mutations while a value of 0 means only retrievals.
     value: "50"
     required: true
+  - name: NOPOPULATION
+    description: By default cbc-pillowfight will load all the items (see NUMITEMS) into the cluster and then begin performing the normal workload. Specifying this option bypasses this stage. Useful if the items have already been loaded in a previous run. Set to "-n" to enable this option
+    value: ""
   - name: MINSIZE
     description: Specify the minimum value sizes to be stored into the cluster.
     value: "100"
@@ -88,4 +95,3 @@ parameters:
   - name: USECS
     description: Specify the operation timeout in microseconds. This is the time the client will wait for an operation to complete before timing it out. The default is 2500000
     required: false
-
