@@ -1,15 +1,18 @@
 # cbc-pillowfight
 cbc-pillowfight - Stress Test for Couchbase Client and Cluster
 
-##Build the docker image
+## Build the Docker image locally
 ```bash
 docker build -f ./Dockerfile .
 ```
 
-##Deploy in Openshift
+## Docker image
+https://hub.docker.com/r/nmotte/cbc-pillowfight/
+
+## Deploy injectors in Openshift
 ```bash
 REPLICATION_CONTROLLER_SUFFIX=reader
-REPLICA_COUNT=1
+REPLICA_COUNT=3
 REGISTRY=#REGISTRY TO USE, PRIVATE OR PUBLIC#
 BATCHSIZE=10000
 NUMITEMS=150000000
